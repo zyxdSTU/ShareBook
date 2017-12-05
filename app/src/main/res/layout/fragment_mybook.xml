@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/title_mybook"/>
+    <RadioGroup
+        android:background="#ffffff"
+        android:id="@+id/myBook_radioGroup"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <RadioButton
+            android:gravity="center"
+            android:textColor="#8a8a8a"
+            android:id="@+id/ground_radioButton"
+            android:textSize="18sp"
+            android:button="@null"
+            android:text="上架书籍"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <RadioButton
+            android:gravity="center"
+            android:id="@+id/undercarriage_radioButton"
+            android:textColor="#8a8a8a"
+            android:textSize="18sp"
+            android:button="@null"
+            android:text="下架书籍"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+    </RadioGroup>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp">
+        <View
+            android:layout_marginLeft="60dp"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/left_line"
+            android:background="#3D5AFE"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"/>
+        <View
+            android:layout_marginRight="60dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/right_line"
+            android:background="#3D5AFE"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+
+
+    <com.zy.sharebook.util.NoScrollViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="12">
+    </com.zy.sharebook.util.NoScrollViewPager>
+</LinearLayout>

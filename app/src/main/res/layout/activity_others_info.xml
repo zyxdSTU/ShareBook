@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/title"/>
+    <RelativeLayout
+        android:background="#304FFE"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:clickable="true"
+            android:id="@+id/image"
+            android:layout_centerInParent="true"
+            android:src="@drawable/test_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5">
+
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/info_user"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <TextView
+                android:id="@+id/name_textView"
+                android:paddingLeft="20dp"
+                android:textSize="18sp"
+                android:text="周宇"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:background="#e0e0e0"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/sex"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <TextView
+                android:id="@+id/sex_textView"
+                android:paddingLeft="20dp"
+                android:textSize="18sp"
+                android:text="男"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:background="#e0e0e0"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/id"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <TextView
+                android:id="@+id/id_textView"
+                android:paddingLeft="20dp"
+                android:textSize="18sp"
+                android:text="14040310045"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:background="#e0e0e0"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <LinearLayout
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/address"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <TextView
+                android:id="@+id/address_textView"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:textSize="18sp"
+                android:text="海棠8号楼二区216宿舍"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:background="#e0e0e0"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:paddingTop="25dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+
+        <Button
+            android:id="@+id/borrow_button"
+            android:textColor="#ffffff"
+            android:background="@drawable/re_button"
+            android:text="向他借书"
+            android:layout_width="320dp"
+            android:layout_height="40dp" />
+
+        <Button
+            android:id="@+id/report_button"
+            android:textColor="#ffffff"
+            android:background="@drawable/re_button"
+            android:text="投诉"
+            android:layout_width="320dp"
+            android:layout_height="40dp"/>
+    </LinearLayout>
+
+</LinearLayout>

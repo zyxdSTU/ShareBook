@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/title"/>
+
+    <LinearLayout
+        android:layout_marginTop="150dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_marginLeft="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_marginLeft="60dp"
+                android:id="@+id/phoneNumber_layout"
+                android:layout_height="wrap_content"
+                android:layout_width="240dp">
+
+                <EditText
+                    android:textColor="#eeeeee"
+                    android:paddingLeft="5dp"
+                    android:id="@+id/phoneNumber_editText"
+                    android:layout_width="match_parent"
+                    android:background="@null"
+                    android:layout_height="wrap_content" />
+                <View
+                    android:layout_alignBottom="@id/phoneNumber_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#EEEEEE"/>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="手机号"
+                android:textSize="20sp"
+                android:textColor="#eeeeee"
+                android:layout_alignTop="@id/phoneNumber_layout"
+                 />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginLeft="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="45dp"
+                android:id="@+id/password_layout"
+                android:layout_height="wrap_content"
+                android:layout_width="240dp">
+
+                <EditText
+                    android:textColor="#eeeeee"
+                    android:inputType="textPassword"
+                    android:paddingLeft="5dp"
+                    android:id="@+id/password_editText"
+                    android:layout_width="match_parent"
+                    android:background="@null"
+                    android:layout_height="wrap_content" />
+                <View
+                    android:layout_alignBottom="@id/password_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#EEEEEE"/>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="密码"
+                android:textSize="20sp"
+                android:textColor="#eeeeee"
+                android:layout_alignTop="@id/password_layout"
+                />
+
+        </RelativeLayout>
+
+        <Button
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="80dp"
+            android:id="@+id/login_button"
+            android:background="#536DFE"
+            android:textColor="#eeeeee"
+            android:text="登录"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="35dp"
+                android:textSize="20sp"
+                android:id="@+id/forget_textView"
+                android:clickable="true"
+                android:text="忘记密码"
+                android:textColor="#eeeeee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginRight="35dp"
+                android:layout_alignParentRight="true"
+                android:textColor="#eeeeee"
+                android:textSize="20sp"
+                android:id="@+id/register_textView"
+                android:clickable="true"
+                android:text="注册"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_weight="10"
+        android:layout_height="0dp">
+    </android.support.v4.view.ViewPager>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:layout_gravity="center_horizontal"
+                android:background="#ffffff"
+                android:id="@+id/bookstore_ImageButton"
+                android:src="@drawable/d_bookstore"
+                android:layout_width="32dp"
+                android:layout_height="32dp" />
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/bookstore_textView"
+                android:text="书库"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:layout_gravity="center_horizontal"
+                android:background="#ffffff"
+                android:id="@+id/myBook_ImageButton"
+                android:src="@drawable/d_mybook"
+                android:layout_width="32dp"
+                android:layout_height="32dp" />
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/myBook_textView"
+                android:text="我的"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/history_ImageButton"
+                android:background="#ffffff"
+                android:src="@drawable/d_history"
+                android:layout_width="32dp"
+                android:layout_height="32dp" />
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/history_textView"
+                android:text="借阅"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/user_ImageButton"
+                android:background="#ffffff"
+                android:src="@drawable/d_user"
+                android:layout_width="32dp"
+                android:layout_height="32dp" />
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/user_textView"
+                android:text="用户"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
