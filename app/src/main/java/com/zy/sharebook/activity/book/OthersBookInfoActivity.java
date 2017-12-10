@@ -148,6 +148,7 @@ public class OthersBookInfoActivity extends AppCompatActivity implements  AbsLis
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(OthersBookInfoActivity.this, OthersInfoActivity.class);
                 intent.putExtra("phoneNumber", mList.get(i));
+                intent.putExtra("isbnNumber", isbnNumber);
                 intent.putExtra("type", "borrow");
                 startActivity(intent);
             }
@@ -169,9 +170,7 @@ public class OthersBookInfoActivity extends AppCompatActivity implements  AbsLis
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String jsonPhoneNumberList = response.body().string();
-                Log.d("OthersBookInfoActivity", jsonPhoneNumberList);
                 List<String> phoneNumberList = new Gson().fromJson(jsonPhoneNumberList, new TypeToken<List<String>>(){}.getType());
-                Log.d("OthersBookInfoActivity", String.valueOf(phoneNumberList.size()));
                 mList.clear();
                 mList.addAll(phoneNumberList);
                 Message msg = new Message(); msg.what = ACQUIRE_SUCCESS_PHONENUMBER;
@@ -194,9 +193,9 @@ public class OthersBookInfoActivity extends AppCompatActivity implements  AbsLis
 
     public String dispose(String str) {
         StringBuilder builder = new StringBuilder();
-        if(str.length() >= 25) {
-            builder.append(str.substring(0, 22));
-            builder.append("...");
+        if(str.length() >= 22) {
+            builder.append(str.substring(0, 20));
+            builder.append("..");
             return builder.toString();
         }else return str;
     }

@@ -7,15 +7,21 @@
 
     <include layout="@layout/title"/>
 
-    <GridView
-        android:layout_marginTop="10dp"
-        android:id="@+id/grid_view"
-        android:horizontalSpacing="10dp"
-        android:verticalSpacing="10dp"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_layout"
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:numColumns="3"
         android:layout_height="match_parent">
-    </GridView>
+        <GridView
+            android:background="#e5e5e5"
+            android:layout_marginTop="5dp"
+            android:id="@+id/grid_view"
+            android:horizontalSpacing="5dp"
+            android:verticalSpacing="5dp"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:numColumns="3"
+            android:layout_height="match_parent">
+        </GridView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

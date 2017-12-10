@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,6 +64,9 @@ public class BookStoreFragment extends Fragment implements AbsListView.OnScrollL
         public void handleMessage(Message msg) {
             switch(msg.what) {
                 case ACQUIRE_SUCCESS: {
+                    if(swipeRefreshLayout.isRefreshing()) {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
                     adapter.notifyDataSetChanged();
                     break;
                 }
@@ -70,6 +74,9 @@ public class BookStoreFragment extends Fragment implements AbsListView.OnScrollL
             }
         }
     };
+
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -100,6 +107,7 @@ public class BookStoreFragment extends Fragment implements AbsListView.OnScrollL
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
+                        /*one 图书所有者  two 图书所有者，但书被借出 three 第三者 four 借书者*/
                         String result = response.body().string();
                         if(result.equals("one")) {
                             Intent intent = new Intent(getActivity(), UndercarriageBookInfoActivity.class);
@@ -120,6 +128,20 @@ public class BookStoreFragment extends Fragment implements AbsListView.OnScrollL
             }
         });
 
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_layout);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+            @Override
+            public void onRefresh() {
+                getIntentData();
+            }
+        });
+
+        getIntentData();
+        return view;
+    }
+
+    public void getIntentData() {
         HttpHelper.sendOkHttpRequest(SELECT_ALL_BOOK, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -144,7 +166,6 @@ public class BookStoreFragment extends Fragment implements AbsListView.OnScrollL
                 handler.sendMessage(msg);
             }
         });
-        return view;
     }
 
     @Override
@@ -252,6 +273,7 @@ public class BookStoreFragment extends Fragment implements AbsListView.OnScrollL
             }
             return convertView;
         }
+
         @Override
         public long getItemId(int i) {
             return i;

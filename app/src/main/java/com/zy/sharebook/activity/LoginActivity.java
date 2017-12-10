@@ -1,6 +1,8 @@
 package com.zy.sharebook.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,7 +28,6 @@ import static com.zy.sharebook.util.Constant.ACCOUNT_VERIFY;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG="LoginActivity";
-    private TextView titleTextView;
     private EditText phoneNumberEditText;
     private EditText passwordEditText;
     private Button loginButton;
@@ -37,12 +38,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        if(Build.VERSION.SDK_INT >= 21) {
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+
+
         setContentView(R.layout.activity_login);
         if(getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        titleTextView = (TextView) findViewById(R.id.titleName_textView);
-        titleTextView.setText("登录");
 
         phoneNumberEditText = (EditText) findViewById(R.id.phoneNumber_editText);
         passwordEditText = (EditText) findViewById(R.id.password_editText);
@@ -83,6 +90,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             PreferenceManager.getInstance().preferenceManagerSave("currentPhoneNumber", phoneNumber);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
+
+                            /*can't back*/
+                            finish();
                         }
                     }
 

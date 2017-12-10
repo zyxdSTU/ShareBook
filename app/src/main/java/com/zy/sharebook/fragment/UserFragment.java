@@ -24,11 +24,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.zy.sharebook.R;
+import com.zy.sharebook.activity.LoginActivity;
+import com.zy.sharebook.activity.UserUpdateActivity;
 import com.zy.sharebook.bean.Account;
 import com.zy.sharebook.bean.Book;
 import com.zy.sharebook.database.DatabaseHelper;
@@ -56,10 +60,13 @@ import static com.zy.sharebook.util.Constant.UPLOAD_IMAGE;
 
 public class UserFragment extends Fragment {
     private TextView nameTextView;
+    private TextView phoneNumberText;
     private TextView sexTextView;
     private TextView idTextView;
     private TextView addressTextView;
+    private Button logoutButton;
     private CircleImageView imageCircleImageView;
+    private ImageButton editButton;
     private static final int CHOOSE_PHOTO = 2;
     private Account account = new Account();
     private final static int ACQUIRE_SUCCESS = 11;
@@ -80,12 +87,13 @@ public class UserFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user, container, false);
         imageCircleImageView = (CircleImageView) view.findViewById(R.id.image);
         nameTextView = (TextView)view.findViewById(R.id.name_textView);
+        phoneNumberText = (TextView) view.findViewById(R.id.phoneNumber_textView);
         sexTextView = (TextView) view.findViewById(R.id.sex_textView);
         idTextView = (TextView) view.findViewById(R.id.id_textView);
         addressTextView = (TextView) view.findViewById(R.id.address_textView);
-
+        logoutButton = (Button) view.findViewById(R.id.logout_button);
+        editButton = (ImageButton) view.findViewById(R.id.edit_button);
         String accountJson = PreferenceManager.getInstance().preferenceManagerGet("currentAccountJson");
-        Log.d("UserFragment", accountJson);
         if(accountJson == "") {
             String currentPhoneNumber = PreferenceManager.getInstance().preferenceManagerGet("currentPhoneNumber");
             HttpHelper.sendOkHttpRequest(SELECT_ACCOUNT + currentPhoneNumber, new Callback() {
@@ -119,16 +127,41 @@ public class UserFragment extends Fragment {
         imageCircleImageView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Log.d("UserFragment", "onClick: ");
                 PreferenceManager.getInstance().preferenceManagerRemove("currentAccountJson");
                 uploadImage();
             }
         });
+
+        logoutButton.setOnClickListener(new View.OnClickListener(){
+            /*跳转界面login, 清除用户信息*/
+            @Override
+            public void onClick(View view) {
+                PreferenceManager.getInstance().preferenceManagerRemove("currentPhoneNumber");
+                PreferenceManager.getInstance().preferenceManagerRemove("currentAccountJson");
+
+                Intent intent = new Intent(UserFragment.this.getActivity(), LoginActivity.class);
+
+                /*bug*/
+                UserFragment.this.getActivity().finish();
+
+                UserFragment.this.getActivity().startActivity(intent);
+            }
+        });
+
+        editButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UserFragment.this.getActivity(), UserUpdateActivity.class);
+                UserFragment.this.getActivity().startActivity(intent);
+            }
+        });
+
         return view;
     }
 
     public void setInfo() {
         nameTextView.setText(account.getName());
+        phoneNumberText.setText(account.getPhoneNumber());
         sexTextView.setText(account.getSex());
         idTextView.setText(account.getId());
         addressTextView.setText(account.getAddress());

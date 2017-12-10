@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:adjustViewBounds="true"
+            android:id="@+id/book_imageView"
+            android:layout_weight="2"
+            android:src="@drawable/testbook"
+            android:layout_width="0dp"
+            android:layout_height="100dp" />
+
+        <LinearLayout
+            android:layout_weight="5"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/title_textView"
+                android:layout_marginBottom="5dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="Android开发艺术探索"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="状态："
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/status_textView"
+                    android:text= "申请阶段"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/role_textView"
+                    android:text="所有者："
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/name_textView"
+                    android:textStyle="bold"
+                    android:clickable="true"
+                    android:textColor="#3D5AFE"
+                    android:textSize="15sp"
+                    android:text= "周宇"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/button_linearLayout"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/agree_button"
+                    android:background="@drawable/re_button"
+                    android:textColor="#ffffff"
+                    android:text="同意申请"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp" />
+
+                <Button
+                    android:id="@+id/reject_button"
+                    android:layout_marginLeft="30dp"
+                    android:background="@drawable/re_button"
+                    android:textColor="#ffffff"
+                    android:text="拒绝申请"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp" />
+            </LinearLayout>
+
+            <Button
+                android:layout_marginBottom="5dp"
+                android:visibility="gone"
+                android:id="@+id/cancel_button"
+                android:text="取消申请"
+                android:background="@drawable/re_button"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_marginBottom="5dp"
+                android:visibility="gone"
+                android:id="@+id/revert_button"
+                android:text="申请归还"
+                android:background="@drawable/re_button"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_marginBottom="5dp"
+                android:visibility="gone"
+                android:id="@+id/confirm_button"
+                android:text="确认归还"
+                android:background="@drawable/re_button"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+   <View
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="#e5e5e5"/>
+</LinearLayout>
+
+
+
+<!-- 取消申请  同意申请 拒绝申请  申请归还  确认归还-->

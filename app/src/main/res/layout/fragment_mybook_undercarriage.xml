@@ -4,14 +4,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <GridView
-        android:layout_marginTop="10dp"
-        android:id="@+id/grid_view"
-        android:horizontalSpacing="10dp"
-        android:verticalSpacing="10dp"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_layout"
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:numColumns="3"
         android:layout_height="match_parent">
-    </GridView>
+
+        <GridView
+            android:layout_marginTop="10dp"
+            android:id="@+id/grid_view"
+            android:horizontalSpacing="10dp"
+            android:verticalSpacing="10dp"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:numColumns="3"
+            android:layout_height="match_parent">
+        </GridView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

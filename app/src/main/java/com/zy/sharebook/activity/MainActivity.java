@@ -18,7 +18,9 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.zy.sharebook.R;
+import com.zy.sharebook.activity.book.BaseBookInfoActivity;
 import com.zy.sharebook.activity.book.GroundBookInfoActivity;
+import com.zy.sharebook.activity.book.UndercarriageBookInfoActivity;
 import com.zy.sharebook.adapter.FragmentAdapter;
 import com.zy.sharebook.bean.Book;
 import com.zy.sharebook.database.DatabaseHelper;
@@ -27,6 +29,7 @@ import com.zy.sharebook.fragment.HistoryFragment;
 import com.zy.sharebook.fragment.MyBookFragment;
 import com.zy.sharebook.fragment.UserFragment;
 import com.zy.sharebook.network.HttpHelper;
+import com.zy.sharebook.util.PreferenceManager;
 import com.zy.sharebook.util.Util;
 
 import java.io.IOException;
@@ -37,6 +40,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 import static com.zy.sharebook.util.Constant.BOOK_URL;
+import static com.zy.sharebook.util.Constant.CHOOSE_ROLE;
 
 public class MainActivity extends AppCompatActivity implements  View.OnClickListener {
     private ImageButton bookstoreImageButton;
@@ -96,6 +100,11 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         historyImageButton.setOnClickListener(this);
         userImageButton.setOnClickListener(this);
 
+        bookstoreTextView.setOnClickListener(this);
+        myBookTextView.setOnClickListener(this);
+        historyTextView.setOnClickListener(this);
+        userTextView.setOnClickListener(this);
+
         FragmentAdapter fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), list);
         viewPager.setAdapter(fragmentAdapter);
 
@@ -125,14 +134,18 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         int id = view.getId();
         switch(id) {
             case R.id.bookstore_ImageButton:
+            case R.id.bookstore_textView:
                 changeTab(0);
                 break;
             case R.id.myBook_ImageButton:
+            case R.id.myBook_textView:
                 changeTab(1);
                 break;
             case R.id.history_ImageButton:
+            case R.id.history_textView:
                 changeTab(2);
                 break;
+            case R.id.user_textView:
             case R.id.user_ImageButton:
                 changeTab(3);
                 break;
@@ -186,16 +199,30 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
                 HttpHelper.sendOkHttpRequest(BOOK_URL + result.getContents(), new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
-
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(MainActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-                        Message msg = new Message();
                         String bookXml = response.body().string();
-                        msg.obj = bookXml;
-                        msg.what = GET_XML_SUCCESS;
-                        handler.sendMessage(msg);
+                        if(bookXml == null) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(MainActivity.this, "抱歉,数据库没有此图书信息", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }else {
+                            Message msg = new Message();
+                            msg.obj = bookXml;
+                            msg.what = GET_XML_SUCCESS;
+                            handler.sendMessage(msg);
+                        }
                     }
                 });
             }
@@ -204,12 +231,39 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         }
     }
 
-    public void gotoActivity(Book book) {
-        /*直接存储进数据库*/
-        DatabaseHelper.getDatabaseHelper().insertBook(book);
+    public void gotoActivity(final Book book) {
+        String phoneNumber = PreferenceManager.getInstance().preferenceManagerGet("currentPhoneNumber");
+        String url = CHOOSE_ROLE + "isbnNumber=" + book.getIsbnNumber() + "&phoneNumber=" +phoneNumber;
 
-        Intent intent = new Intent(this, GroundBookInfoActivity.class);
-        intent.putExtra("isbnNumber", book.getIsbnNumber());
-        startActivity(intent);
+        HttpHelper.sendOkHttpRequest(url, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+               runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                        /*one 图书所有者  two 图书所有者，但书被借出 three 第三者 four 借书者*/
+                String result = response.body().string();
+                if(result.equals("one")) {
+                    Intent intent = new Intent(MainActivity.this, UndercarriageBookInfoActivity.class);
+                    intent.putExtra("isbnNumber", book.getIsbnNumber());
+                    startActivity(intent);
+                }else if(result.equals("two") || result.equals("four")) {
+                    Intent intent = new Intent(MainActivity.this, BaseBookInfoActivity.class);
+                    intent.putExtra("isbnNumber", book.getIsbnNumber());
+                    startActivity(intent);
+                }else if(result.equals("three")) {
+                    Intent intent = new Intent(MainActivity.this, GroundBookInfoActivity.class);
+                    intent.putExtra("isbnNumber", book.getIsbnNumber());
+                    startActivity(intent);
+                }
+            }
+        });
     }
 }

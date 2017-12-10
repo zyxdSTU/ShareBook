@@ -20,6 +20,14 @@ public class Constant {
     public static final String SELECT_OWNERS = "http://39.108.82.12:8080/ShareBook/selectOwners?isbnNumber=";
     public static final String UNDERCARRIAGE_BOOK = "http://39.108.82.12:8080/ShareBook/undercarriageBook?";
     public static final String GROUND_BOOK = "http://39.108.82.12:8080/ShareBook/groundBook?";
+    public static final String SELECT_NAME = "http://39.108.82.12:8080/ShareBook/selectName?phoneNumber=";
+    public static final String SELECT_OWNER = "http://39.108.82.12:8080/ShareBook/selectOwner?owner=";
+    public static final String SELECT_BORROWER = "http://39.108.82.12:8080/ShareBook/selectBorrower?borrower=";
+    public static final String APPLY = "http://39.108.82.12:8080/ShareBook/apply";
+    public static final String COMPLETE = "http://39.108.82.12:8080/ShareBook/complete";
+    public static final String UPDATE = "http://39.108.82.12:8080/ShareBook/update";
+    public static final String UPDATE_ACCOUNT = "http://39.108.82.12:8080/ShareBook/updateAccount";
+
     /*创建数据库*/
     public static final String CREATE_BOOK = "create table book(" +
             "isbnNumber text primary key," +

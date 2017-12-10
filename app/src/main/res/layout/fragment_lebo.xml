@@ -1,25 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <GridView
-            android:layout_marginTop="10dp"
-            android:id="@+id/grid_view"
-            android:horizontalSpacing="10dp"
-            android:verticalSpacing="10dp"
+        <ListView
+            android:id="@+id/list_view"
             android:layout_width="match_parent"
-            android:gravity="center"
-            android:numColumns="3"
             android:layout_height="match_parent">
-        </GridView>
-
+        </ListView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

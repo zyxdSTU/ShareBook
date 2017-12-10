@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,11 +54,13 @@ public class GroundFragment extends Fragment implements AbsListView.OnScrollList
     private ArrayList<BookStore> list = new ArrayList<BookStore>();
     private GridView gridView;
     private GridViewAdapter adapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch(msg.what) {
                 case ACQUIRE_SUCCESS:{
+                    if(swipeRefreshLayout.isRefreshing()) swipeRefreshLayout.setRefreshing(false);
                     adapter.notifyDataSetChanged();
                     break;
                 }
@@ -88,6 +91,14 @@ public class GroundFragment extends Fragment implements AbsListView.OnScrollList
             }
         });
 
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_layout);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getInternetData();
+            }
+        });
 
         getInternetData();
         return view;

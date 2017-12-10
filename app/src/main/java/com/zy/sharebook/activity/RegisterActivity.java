@@ -1,6 +1,8 @@
 package com.zy.sharebook.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -35,7 +37,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Button acquireCodeButton;
     private Button nextStepButton;
 
-    private TextView titleNameTextView;
     private String phoneNumber;
     private String identifyCode;
 
@@ -61,6 +62,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        if(Build.VERSION.SDK_INT >= 21) {
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+
         setContentView(R.layout.activity_register);
         if(getSupportActionBar() != null) {
             getSupportActionBar().hide();
@@ -70,8 +78,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         identifyCodeEditText = (EditText) findViewById(R.id.identifyCode_editText);
         acquireCodeButton = (Button) findViewById(R.id.acquireCode_button);
         nextStepButton = (Button) findViewById(R.id.nextStep_button);
-        titleNameTextView = (TextView) findViewById(R.id.titleName_textView);
-        titleNameTextView.setText("注册");
         acquireCodeButton.setOnClickListener(this);
         nextStepButton.setOnClickListener(this);
 

@@ -39,11 +39,13 @@
         <activity android:name=".activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".activity.book.OthersBookInfoActivity" />
-        <activity android:name=".activity.OthersInfoActivity"></activity>
+        <activity android:name=".activity.OthersInfoActivity" />
+        <activity android:name=".activity.UserUpdateActivity"></activity>
     </application>
 
 </manifest>

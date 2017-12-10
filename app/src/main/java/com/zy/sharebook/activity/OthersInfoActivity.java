@@ -1,5 +1,6 @@
 package com.zy.sharebook.activity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -16,11 +17,14 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.zy.sharebook.R;
+import com.zy.sharebook.activity.book.BaseBookInfoActivity;
 import com.zy.sharebook.activity.book.OthersBookInfoActivity;
 import com.zy.sharebook.bean.Account;
+import com.zy.sharebook.bean.Borrow;
 import com.zy.sharebook.fragment.UserFragment;
 import com.zy.sharebook.network.HttpHelper;
 import com.zy.sharebook.util.PreferenceManager;
+import com.zy.sharebook.util.Util;
 import com.zy.sharebook.util.imageloader.ImageLoader;
 
 import java.io.IOException;
@@ -30,11 +34,14 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
+import static com.zy.sharebook.util.Constant.APPLY;
+import static com.zy.sharebook.util.Constant.CHOOSE_ROLE;
 import static com.zy.sharebook.util.Constant.IMAGE_URL;
 import static com.zy.sharebook.util.Constant.SELECT_ACCOUNT;
 
 public class OthersInfoActivity extends AppCompatActivity {
     private TextView nameTextView;
+    private TextView phoneNumberTextView;
     private TextView sexTextView;
     private TextView idTextView;
     private TextView addressTextView;
@@ -69,6 +76,7 @@ public class OthersInfoActivity extends AppCompatActivity {
         }
         imageCircleImageView = (CircleImageView) findViewById(R.id.image);
         nameTextView = (TextView) findViewById(R.id.name_textView);
+        phoneNumberTextView = (TextView) findViewById(R.id.phoneNumber_textView);
         sexTextView = (TextView) findViewById(R.id.sex_textView);
         idTextView = (TextView) findViewById(R.id.id_textView);
         addressTextView = (TextView) findViewById(R.id.address_textView);
@@ -79,12 +87,48 @@ public class OthersInfoActivity extends AppCompatActivity {
         borrowButton = (Button) findViewById(R.id.borrow_button);
         reportButton = (Button) findViewById(R.id.report_button);
         String type = getIntent().getStringExtra("type");
+
         if(type.equals("borrow")) {
             reportButton.setVisibility(View.GONE);
             borrowButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     /*处理借书逻辑*/
+                    Borrow borrow = new Borrow();
+                    borrow.setIsbnNumber(getIntent().getStringExtra("isbnNumber"));
+                    borrow.setBorrower(PreferenceManager.getInstance().preferenceManagerGet("currentPhoneNumber"));
+                    borrow.setBtime(Util.getCurrentTime());
+                    borrow.setStatus(1);
+                    borrow.setOwner(getIntent().getStringExtra("phoneNumber"));
+
+                    Log.d("OthersInfoActivity", new Gson().toJson(borrow));
+
+                    HttpHelper.sendOKHttpPost(new Gson().toJson(borrow), APPLY, new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            OthersInfoActivity.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(OthersInfoActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            OthersInfoActivity.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(OthersInfoActivity.this, "申请成功", Toast.LENGTH_SHORT).show();
+
+                                    Intent intent = new Intent(OthersInfoActivity.this, BaseBookInfoActivity.class);
+                                    intent.putExtra("isbnNumber", getIntent().getStringExtra("isbnNumber"));
+                                    startActivity(intent);
+
+                                }
+                            });
+                        }
+                    });
                 }
             });
         }else if(type.equals("report")) {
@@ -99,6 +143,7 @@ public class OthersInfoActivity extends AppCompatActivity {
 
 
         String phoneNumber = getIntent().getStringExtra("phoneNumber");
+
         if(phoneNumber == null) {
             String jsonAccount = getIntent().getStringExtra("jsonAccount");
             account = new Gson().fromJson(jsonAccount, Account.class);
@@ -130,6 +175,7 @@ public class OthersInfoActivity extends AppCompatActivity {
 
     public void setInfo() {
         nameTextView.setText(account.getName());
+        phoneNumberTextView.setText(account.getPhoneNumber());
         sexTextView.setText(account.getSex());
         idTextView.setText(account.getId());
         addressTextView.setText(account.getAddress());

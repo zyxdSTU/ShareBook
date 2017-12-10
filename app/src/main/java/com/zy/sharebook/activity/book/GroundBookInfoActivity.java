@@ -171,9 +171,9 @@ public class GroundBookInfoActivity extends AppCompatActivity{
 
     public String dispose(String str) {
         StringBuilder builder = new StringBuilder();
-        if(str.length() >= 25) {
-            builder.append(str.substring(0, 22));
-            builder.append("...");
+        if(str.length() >= 22) {
+            builder.append(str.substring(0, 20));
+            builder.append("..");
             return builder.toString();
         }else return str;
     }

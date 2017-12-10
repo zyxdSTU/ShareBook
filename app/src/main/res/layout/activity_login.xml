@@ -5,20 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/title"/>
-
     <LinearLayout
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="180dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <RelativeLayout
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <RelativeLayout
-                android:layout_marginLeft="60dp"
+                android:layout_marginLeft="65dp"
                 android:id="@+id/phoneNumber_layout"
                 android:layout_height="wrap_content"
                 android:layout_width="240dp">
@@ -48,13 +47,13 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <RelativeLayout
                 android:layout_marginTop="30dp"
-                android:layout_marginLeft="45dp"
+                android:layout_marginLeft="65dp"
                 android:id="@+id/password_layout"
                 android:layout_height="wrap_content"
                 android:layout_width="240dp">
@@ -86,8 +85,8 @@
         </RelativeLayout>
 
         <Button
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="80dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="60dp"
             android:id="@+id/login_button"
             android:background="#536DFE"
             android:textColor="#eeeeee"

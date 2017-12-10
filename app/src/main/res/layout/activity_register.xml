@@ -6,10 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/title"
-        layout="@layout/title">
-    </include>
 
     <LinearLayout
         android:orientation="vertical"
@@ -34,6 +30,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content">
                 <EditText
+                    android:textColor="#ffffff"
                     android:background="@null"
                     android:id="@+id/phoneNumber_editText"
                     android:layout_width="match_parent"
@@ -56,6 +53,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:textColor="#ffffff"
                     android:layout_marginTop="20dp"
                     android:background="@null"
                     android:id="@+id/identifyCode_editText"
@@ -69,7 +67,7 @@
             </LinearLayout>
 
             <Button
-                android:background="#8C9EFF"
+                android:background="#536DFE"
                 android:textColor="#FFFFFF"
                 android:id="@+id/acquireCode_button"
                 android:text="获取验证码"

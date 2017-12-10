@@ -32,7 +32,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5">
+        android:layout_weight="7">
 
         <LinearLayout
             android:layout_marginLeft="5dp"
@@ -58,6 +58,32 @@
             android:background="#e0e0e0"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
+
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/phonenumber"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <TextView
+                android:id="@+id/phoneNumber_textView"
+                android:paddingLeft="20dp"
+                android:textSize="18sp"
+                android:text="18392476278"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:background="#e0e0e0"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
         <LinearLayout
             android:layout_marginLeft="5dp"
             android:layout_marginBottom="5dp"
@@ -128,12 +154,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-    </LinearLayout>
 
-    <View
-        android:background="#e0e0e0"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        <View
+            android:background="#e0e0e0"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+    </LinearLayout>
 
     <LinearLayout
         android:gravity="center_horizontal"
@@ -143,11 +169,12 @@
 
         <Button
             android:layout_marginTop="10dp"
+            android:id="@+id/logout_button"
             android:textColor="#ffffff"
             android:background="@drawable/re_button"
             android:text="退出登录"
             android:layout_width="300dp"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"/>
     </LinearLayout>
 
 </LinearLayout>

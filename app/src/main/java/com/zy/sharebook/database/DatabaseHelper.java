@@ -42,7 +42,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("summary", book.getSummary());
         values.put("tag", book.getTag());
         db.insert("book", null, values);
-        db.close();
     }
 
     public Book selectByIsbn(String isbnNumber) {
